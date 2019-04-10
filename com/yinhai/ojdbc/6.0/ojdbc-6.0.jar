@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<title>用户登录 - 码云 Gitee.com</title>
+<link href="/assets/favicon-e87ded4710611ed62adc859698277663.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<meta charset='utf-8'>
+<meta content='always' name='referrer'>
+<meta content='码云' property='og:site_name'>
+<meta content='Object' property='og:type'>
+<meta content='http://gitee.com/login' property='og:url'>
+<meta content='https://gitee.com/logo_themecolor.png' itemprop='image' property='og:image'>
+<meta content='用户登录 - 码云 Gitee.com' itemprop='name' property='og:title'>
+<meta content='码云(gitee.com)是开源中国推出的代码托管平台，支持 Git 和 SVN，提供免费的私有仓库托管。目前已有超过 300 万的开发者选择码云。' property='og:description'>
+<meta content='码云,代码托管,git,Git@OSC,gitee.com,开源,项目管理,版本控制,开源代码,代码分享,项目协作,开源项目托管,免费代码托管,Git代码托管,Git托管服务' name='Keywords'>
+<meta content='码云(gitee.com)是开源中国推出的代码托管平台，支持 Git 和 SVN，提供免费的私有仓库托管。目前已有超过 300 万的开发者选择码云。' itemprop='description' name='Description'>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="/gohG1TiH9Aw54O8lEaR/MGGo/XQiTVOwZeaw/ZD9qA=" name="csrf-token" />
+
+<link href="/assets/application-f1fe34557c2ba3517d711d78aa917215.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/assets/application-82996ac0175a3d642cac74be238913a0.js" type="text/javascript"></script>
+<script src="/assets/lib/jquery.timeago.zh-CN-bcd91c2c27a815fa9a395595874b592b.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+window.gon = {};gon.locale="zh-CN";gon.tour_env={"current_user":null,"controller_path":"sessions","action_name":"new","original_url":"http://gitee.com/login"};
+//]]>
+</script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+<script>
+  var title = document.title.replace(/( - Gitee| - 码云)$/, '')
+      imgUrl = '';
+  
+  document.addEventListener('DOMContentLoaded', function(event) {
+    var imgUrlEl = document.querySelector('.readme-box .markdown-body > img, .readme-box .markdown-body :not(a) > img');
+    imgUrl = imgUrlEl && imgUrlEl.getAttribute('src');
+  
+    if (!imgUrl) {
+      imgUrlEl = document.querySelector('meta[itemprop=image]');
+      imgUrl = imgUrlEl && imgUrlEl.getAttribute('content'); 
+      imgUrl = imgUrl || "https://gitee.com/logo_themecolor.png";
+    }
+  
+    wx.config({
+      debug: false,
+      appId: "wxff219d611a159737",
+      timestamp: "1554864566",
+      nonceStr: "0e2dba302f5bc094257d01ed56aa7d94",
+      signature: "9813f2767602c230bf91dbb508c848ea3eb19087",
+      jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+    });
+  
+    wx.ready(function () {
+      wx.onMenuShareTimeline({
+        title: title, // 分享标题
+        link: "https://gitee.com/login", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: imgUrl // 分享图标
+      });
+      wx.onMenuShareAppMessage({
+        title: title, // 分享标题
+        link: "https://gitee.com/login", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        desc: document.querySelector('meta[name=Description]').getAttribute('content'),
+        imgUrl: imgUrl // 分享图标
+      });
+    });
+    wx.error(function(res){
+      console.error('err', res)
+    });
+  })
+</script>
+
+<script type='text/x-mathjax-config'>
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [["$$","$$"],["\\[","\\]"]],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreClass: "container|files",
+    processClass: "markdown-body"
+  }
+});
+</script>
+<script src="https://gitee.com/uploads/resources/MathJax-2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script>
+  var messages = {
+    'zh-CN': {
+      addResult: '增加 <b>{term}</b>',
+      count: '已选择 {count}',
+      maxSelections: '最多 {maxCount} 个选择',
+      noResults: '未找到结果',
+      serverError: '连接服务器时发生错误'
+    },
+    'zh-TW': {
+      addResult: '增加 <b>{term}</b>',
+      count: '已選擇 {count}',
+      maxSelections: '最多 {maxCount} 個選擇',
+      noResults: '未找到結果',
+      serverError: '連接服務器時發生錯誤'
+    }
+  }
+  
+  if (messages[gon.locale]) {
+    $.fn.dropdown.settings.message = messages[gon.locale]
+  }
+</script>
+
+<!--[if lt IE 10]>
+<script>
+    window.location.href = "/incompatible.html";
+</script>
+<![endif]-->
+</head>
+
+<body class='ui_basic home'>
+<header class='common-header fixed noborder' id='git-header-nav'>
+<div class='ui container'>
+<div class='ui menu'>
+<div class='item gitosc-logo'>
+<a href="/"><img class='ui inline image' height='28' src='/logo.svg?20171024' width='95'>
+<img class='ui inline black image' height='28' src='/logo-black.svg?20171024' width='95'>
+</a></div>
+<a href="/explore" class="item " title="开源软件">开源软件
+</a><a href="/enterprises" class="item " title="企业版">企业版
+<sup class='ui red label'>
+特惠
+</sup>
+</a><a href="/education" class="item " title="高校版">高校版
+</a><a href="https://blog.gitee.com/" class="item" id="gitee-blog" target="_blank" title="博客">博客
+</a><div class='right menu userbar' id='git-nav-user-bar'>
+<div class='item'>
+<form accept-charset="UTF-8" action="/search" autocomplete="on" data-text-filter="搜索格式不正确" data-text-require="搜索关键字不能少于1个" id="navbar-search-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<div class='ui mini fluid input'>
+<input id="navbar-search-input" name="q" placeholder="搜索项目、代码片段..." type="text" value="" />
+<input id="navbar-search-type" name="type" type="hidden" />
+</div>
+</form>
+
+
+</div>
+<a href="/signup" class="item">注册
+</a><a href="/login" class="item">登录
+</a><script>
+  $('.destroy-user-session').click(function() {
+    $.cookie('access_token', null, { path: '/' });
+  })
+</script>
+
+</div>
+</div>
+</div>
+</header>
+
+<script>
+  Gitee.initNavbar()
+  Gitee.initRepoRemoteWay()
+</script>
+
+<div class='site-content'>
+<div class='fixed-notice-infos'>
+<div class='ui container'>
+<div class='flash-messages' id='messages-container'></div>
+</div>
+<script>
+  (function() {
+    $(function() {
+      var $error_box, alertTip, notify_content, notify_options, template;
+  
+      template = '<div data-notify="container" class="ui {0} message" role="alert">' + '<i data-notify="dismiss" class="close icon"></i>' + '<span data-notify="message">{2}</span>' + '</div>';
+      notify_content = {
+        "message": "文件大于1M，登录后可见"
+      };
+      notify_options = {
+        "type": "error"
+      };
+      alertTip = '';
+      $error_box = $(".flash_error.flash_error_box");
+      if (notify_options.type === 'error' && $error_box.length > 0 && !$.isEmptyObject(notify_content.message)) {
+        if (notify_content.message === 'captcha_fail') {
+          alertTip = "验证码不正确";
+        } else if (notify_content.message === 'captcha_expired') {
+          alertTip = "验证码已过期，请点击刷新";
+        } else if (notify_content.message === 'not_found_in_database') {
+          alertTip = "帐号或者密码错误";
+        } else if (notify_content.message === 'not_found_and_show_captcha') {
+          alertTip = "帐号或者密码错误";
+        } else {
+          alertTip = notify_content.message;
+        }
+        return $error_box.html(alertTip).show();
+      } else if (notify_content) {
+        notify_options.delay = 3000;
+        notify_options.template = template;
+        notify_options.offset = {
+          x: 10,
+          y: 30
+        };
+        notify_options.element = '#messages-container';
+        return $.notify(notify_content, notify_options);
+      }
+    });
+  
+  }).call(this);
+</script>
+
+</div>
+<script>
+  (function() {
+    $(function() {
+      var setCookie;
+  
+      setCookie = function(name, value) {
+        $.cookie(name, value, {
+          path: '/',
+          expires: 365
+        });
+      };
+      $('#remove-bulletin').on('click', function() {
+        setCookie('remove_bulletin', "gitee-maintain-1553439087");
+        $('#git-bulletin').hide();
+      });
+      $('#remove-member-bulletin').on('click', function() {
+        setCookie('remove_member_bulletin', "gitee_member_bulletin");
+        $(this).parent().hide();
+      });
+      return $('#remove-gift-bulletin').on('click', function() {
+        setCookie('remove_gift_bulletin', "gitee-gift-bulletin");
+        $(this).parent().hide();
+      });
+    });
+  
+  }).call(this);
+</script>
+
+<!--[if lt IE 10]>
+<script>
+  window.location.href = "/incompatible.html"
+</script>
+<![endif]-->
+
+<script src="/assets/new-editor/bootstrap/transition-7357faf7154739259e14e47aacf9841a.js" type="text/javascript"></script>
+<script src="/assets/new-editor/bootstrap/carousel-6b1777f72a46de10bfc073ce8db90b62.js" type="text/javascript"></script>
+<div class='ui container form-with-enterprise-ad'>
+<div class='git-login-row form-wrapper'>
+<div class='git-login-board form-body'>
+<form accept-charset="UTF-8" action="/login" class="ui form" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="/gohG1TiH9Aw54O8lEaR/MGGo/XQiTVOwZeaw/ZD9qA=" /></div><header class='git-login-header'>
+<div class='git-login-title'>
+<i class='fa fa-user-o'></i>
+<span>登录</span>
+</div>
+<span class='float-right register'>
+<a href="/signup">注册</a>
+</span>
+</header>
+<div class='git-login-form-fields'>
+<div class='ui message error flash_error flash_error_box'></div>
+<input id="redirect_to_url" name="redirect_to_url" type="hidden" />
+<div class='field' id='git-login'>
+<input id="user_login" name="user[login]" placeholder="手机／邮箱／个人空间地址" size="30" type="text" />
+</div>
+<div class='field'>
+<input id="user_password" name="user[password]" placeholder="请输入密码" size="30" type="password" />
+</div>
+<div class='field hide signin-error-captcha'>
+<input id="captcha" name="captcha" type="text" value="" />
+<div class='ui basic label wrap-signin-captcha'>
+<img class='captcha_img'>
+</div>
+<div id='statu_captcha'>
+<i></i>
+</div>
+</div>
+<div class='error-message'></div>
+<div class='two fields'>
+<div class='field'>
+<div class='ui checkbox'><input name="user[remember_me]" type="hidden" value="0" /><input id="user_remember_me" name="user[remember_me]" type="checkbox" value="1" /><label>记住我</label></div>
+</div>
+<div class='field' style='text-align: right'>
+<a href="/password/new" class="forget-password">忘记密码?</a>
+</div>
+</div>
+<div class='field'>
+<input class="ui fluid orange submit button large" name="commit" type="submit" value="登 录" />
+<div class='use-oschina-login'>
+<a href="https://gitee.com/auth/oschina"><i class='icon-logo-osc iconfont osc'></i>
+<span>
+使用OSChina帐号登录
+</span>
+</a></div>
+<div class='field'>
+<div class='ui horizontal divider header git-other-login-method'>
+<span>
+其他方式登录
+</span>
+</div>
+</div>
+<div class='ui horizontal list git-other-login-method-icon list-center'>
+<div class='item'>
+<a href="https://gitee.com/auth/aliyun"><div class='git-other-login-icon'>
+<i class='aliyun icon-logo_aliyun iconfont' title='使用阿里云帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/github"><div class='git-other-login-icon'>
+<i class='github icon-logo-github iconfont' title='使用GitHub帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/weibo"><div class='git-other-login-icon'>
+<i class='icon-logo-weibo iconfont weibo' title='使用Weibo帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/qq_connect"><div class='git-other-login-icon'>
+<i class='icon-logo-qq iconfont qq' title='使用 QQ 帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/windowslive"><div class='git-other-login-icon'>
+<i class='icon-logo-windows iconfont windows' title='使用WindowsLive帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/wechat"><div class='git-other-login-icon'>
+<i class='icon-logo_wechat iconfont wechat' title='使用微信帐号登录'></i>
+</div>
+</a></div>
+<div class='item'>
+<a href="https://gitee.com/auth/dingding"><div class='git-other-login-icon'>
+<i class='dingding icon-logo-dingding iconfont' title='使用钉钉帐号登录'></i>
+</div>
+</a></div>
+</div>
+
+</div>
+</div>
+</form>
+
+<a href="/user/activate" class="git-login-activation">重发激活邮件</a>
+</div>
+<div class="enterprise-form-sidebox">
+    	<div class="ui small header">尝试码云企业版？</div>
+    	<ul class="features">
+    		<li>
+    			不止更多成员、更高配额
+    		</li>
+    		<li>
+    			灵活支撑协作研发、代码交付、IT 教育培训等场景代码托管需求
+    		</li>
+    	</ul>
+    	<div class="ui small header">他们都在用</div>
+    	<p>
+    		已有超过 60000 企业研发团队选择码云企业版，60% 客户来自口碑推荐。
+    	</p>
+    	<ul class="enterprise-form-cases">
+    		<li>
+    			<img alt="企业版案例 LOGO" src="https://gitee.com/enterprise_cases/zsyh.png" title="招商银行">
+    		</li>
+    		<li>
+    			<img alt="企业版案例 LOGO" src="https://images.gitee.com/uploads/images/2019/0116/155426_b8020514_1305863.png" title="招商证券">
+    		</li>
+    		<li>
+    			<img alt="企业版案例 LOGO" src="https://images.gitee.com/uploads/images/2018/0927/155607_d6a34985_1305863.png" title="中国电信">
+    		</li>
+			<li>
+    			<img alt="企业版案例 LOGO" src="https://images.gitee.com/uploads/images/2018/1108/110635_f8045ae8_1305863.png" title="‘中国联通’">
+    		</li>
+    		<li>
+    			<img alt="企业版案例 LOGO" src="https://images.gitee.com/uploads/images/2018/0912/115405_7b5d3256_1305863.png" title="比亚迪汽车">
+    		</li>
+			<li>
+    			<img alt="企业版案例 LOGO" src="https://gitee.com/enterprise_cases/ctrj.png" title="超图软件">
+    		</li>
+			<li>
+    			<img alt="企业版案例 LOGO" src="https://images.gitee.com/uploads/images/2018/0813/152316_19d3d1e8_62561.png" title="文思海辉">
+    		</li>
+    		<li>
+    			<img alt="企业版案例 LOGO" src="https://gitee.com/enterprise_cases/zyhz.png" title="作业盒子">
+    		</li>
+    	</ul>
+    	<div class="ui small header">了解更多</div>
+    	<p>
+    		<a href="https://gitee.com/enterprises?from=newproject" target="_blank">企业版介绍</a>
+    	</p>
+    	<p>
+    		<a href="https://gitee.com/enterprise_contrast?from=newproject" target="_blank">社区版与企业版功能对比</a>
+    	</p>
+    </div>
+
+</div>
+</div>
+<script>
+  (function() {
+    $(document).ready(function() {
+      var $status, check, checkFailedAttempts, lastLogin, setResult;
+  
+      $status = $('#statu_captcha').find('i');
+      lastLogin = null;
+      checkFailedAttempts = function(userLogin) {
+        return $.ajax({
+          url: '/check_failed_attempts',
+          data: {
+            userLogin: userLogin
+          },
+          type: 'POST',
+          success: function(data) {
+            if (data.result === 1 && data.failed_count > 2) {
+              $('.signin-error-captcha').show();
+              return $('.wrap-signin-captcha .captcha_img').trigger('click');
+            } else {
+              $status.removeClass('icon checkmark');
+              $status.removeClass('icon remove');
+              $('#captcha').val('');
+              return $('.signin-error-captcha').hide();
+            }
+          }
+        });
+      };
+      check = function(val) {
+        return $.ajax({
+          url: '/check',
+          type: 'POST',
+          data: {
+            'do': 'captcha',
+            'val': val
+          },
+          success: function(data) {
+            return setResult(data);
+          }
+        });
+      };
+      setResult = function(data) {
+        $status.removeClass('icon checkmark');
+        $status.removeClass('icon remove');
+        if (data === '1') {
+          $status.addClass('icon checkmark').css('color', '#6cc644');
+          return $('.error-message').html('');
+        } else {
+          $status.addClass('icon remove').css('color', '#ff2727');
+          return $('.error-message').html(data);
+        }
+      };
+      $('.git-login-form-fields .ui.checkbox').checkbox().checkbox({
+        onUnchecked: function() {
+          return $(this).val(0);
+        },
+        onChecked: function() {
+          return $(this).val(1);
+        }
+      });
+      $('#new_user input').on('keydown', function(e) {
+        var captcha, password, username;
+  
+        if (e.which === 13) {
+          username = $('#user_login').val();
+          password = $('#user_password').val();
+          captcha = $('#captcha').val();
+          if (!username) {
+            $('#user_login').focus();
+            return false;
+          }
+          if (!password) {
+            $('#user_password').focus();
+            return false;
+          }
+          if ($('#captcha').is(':visible')) {
+            if ($.trim(captcha).length !== 6) {
+              $('#captcha').focus();
+              return false;
+            }
+          }
+        }
+      });
+      $('#user_login').on('blur', function() {
+        var userLogin;
+  
+        userLogin = $('#user_login').val().trim();
+        if (lastLogin !== userLogin && userLogin.length > 0) {
+          lastLogin = userLogin;
+          return checkFailedAttempts(userLogin);
+        }
+      });
+      $('#captcha').bind('input propertychange', function() {
+        var captchaVal;
+  
+        captchaVal = $(this).val().trim();
+        if (captchaVal.length === 6) {
+          return check(captchaVal);
+        } else {
+          $status.removeClass('icon checkmark');
+          return $('.error-message').html("请输入6位验证码");
+        }
+      });
+      $('.wrap-signin-captcha .captcha_img').click(function() {
+        $('#captcha').val('');
+        $('.error-message').html('');
+        $status.removeClass('icon checkmark');
+        return $status.removeClass('icon remove');
+      });
+      return $('#new_user').on('submit', function() {
+        return $('#new_user .submit').addClass('disabled');
+      });
+    });
+  
+  }).call(this);
+</script>
+
+</div>
+<footer id='git-footer-main'>
+<div class='ui container'>
+<div class='ui two column grid'>
+<div class='column'>
+<p><a href="https://gitee.com/" target="_blank">© Gitee.com  </a></p>
+<div class='ui three column grid' id='footer-left'>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/about_us" class="item">关于我们</a>
+</div>
+<div class='item'>
+<a href="/terms" class="item">使用条款</a>
+</div>
+<div class='item'>
+<a href="/oschina/git-osc/issues" class="item">意见建议</a>
+</div>
+<div class='item'>
+<a href="/links.html" class="item">合作伙伴</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/api/v5/swagger" class="item">OpenAPI</a>
+</div>
+<div class='item'>
+<a href="/all-about-git" class="item">Git 大全</a>
+</div>
+<div class='item'>
+<a href="https://copycat.gitee.com/" class="item">代码克隆检测</a>
+</div>
+<div class='item'>
+<a href="/appclient" class="item">APP与插件下载</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="https://gitee.com/help" class="item">帮助文档</a>
+</div>
+<div class='item'>
+<a href="https://gitee.com/git-osc/" class="item">更新日志</a>
+</div>
+<div class='item'>
+<a href="/gists" class="item">代码片段</a>
+</div>
+<div class='item'>
+<a href="/gitee-stars" class="item">码云封面人物</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='column right aligned followus'>
+<div class='qrcode weixin'>
+<img alt="Qrcode-weixin" src="/assets/qrcode-weixin-8ab7378f5545710bdb3ad5c9d17fedfe.jpg" />
+<p class='weixin-text'>微信服务号</p>
+</div>
+<div class='phone-and-qq column'>
+<div class='ui list official-support-container'>
+<div class='item'>
+<a href="//shang.qq.com/wpa/qunwpa?idkey=0d6c2fc0b5b71ac33405dd575bb490bf1a50e3c9a9f694e8a689cb59ee7dacc3" class="icon-popup" title="点击加入码云官方群"><i class='iconfont icon-logo-qq'></i>
+<span>
+官方技术支持QQ群：515965326
+</span>
+</a></div>
+<div class='item mail-and-zhihu'>
+<a href="mailto: git@oschina.cn"><i class='iconfont icon-ic-mail'></i>
+<span id='git-footer-email'>
+git#oschina.cn
+</span>
+</a><a href="https://www.zhihu.com/org/ma-yun-osc/ " target="_blank"><i class='iconfont icon-zhihu'></i>
+<span>
+码云Gitee
+</span>
+</a></div>
+<div class='item'>
+企业版售前及售后使用咨询：400-606-0201
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='bottombar'>
+<div class='ui container'>
+<div class='ui grid'>
+<div class='five wide column partner'>
+本站带宽由 <a href="https://www.anchnet.com/" target="_blank" title="anchnet"><img alt="51idc" src="/51idc.png" /></a> 提供
+</div>
+<div class='eleven wide column right aligned'>
+<div class='copyright'>
+<a href="http://www.miitbeian.gov.cn/">粤ICP备12009483号-8</a>
+深圳市奥思网络科技有限公司版权所有
+</div>
+<i class='icon world'></i>
+<a href="/language/zh-CN">简 体
+</a>/
+<a href="/language/zh-TW">繁 體
+</a>/
+<a href="/language/en">English
+</a></div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  var officialEmail = $('#git-footer-email').text()
+  $('#git-footer-main .icon-popup').popup({ position: 'bottom center' })
+  $('#git-footer-email').text(officialEmail.replace('#', '@'))
+</script>
+
+
+<div class='side-toolbar'>
+<div class='button toolbar-help'>
+<i class='iconfont icon-help'></i>
+</div>
+<div class='ui popup left center dark'>点此查找更多帮助</div>
+<div class='toolbar-help-dialog'>
+<div class='toolbar-dialog-header'>
+<h3 class='toolbar-dialog-title'>搜索帮助</h3>
+<form accept-charset="UTF-8" action="/help/load_keywords_data" class="toolbar-help-search-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<div class='ui icon input fluid toolbar-help-search'>
+<input name='keywords' placeholder='请输入产品名称或问题' type='text'>
+<i class='icon search'></i>
+</div>
+</form>
+
+<i class='iconfont icon-close toolbar-dialog-close-icon'></i>
+</div>
+<div class='toolbar-dialog-content'>
+<div class='toolbar-help-hot-search'>
+<div class='toolbar-list'>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4114">Git 仓库基础操作</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4166">企业版和个人版功能对比</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4194">如何处理代码冲突</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4202">在小程序Web开发工具中使用Git做版本管理</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4232">仓库体积过大，如何减小？</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4233">组织私有成员超额，如何处理？</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4234">个人私有成员超过5人，怎么办？</a>
+</div>
+<div class='toolbar-list-item'>
+<a href="/help/articles/4235">Git LFS 操作指南</a>
+</div>
+</div>
+</div>
+<div class='toolbar-help-search-reseult'>
+<div class='toolbar-help-flex-column'>
+<div class='ui centered inline loader toolbar-help-loader'></div>
+<div class='toolbar-list'></div>
+<div class='toolbar-help-link-to-help'>
+<a href="" target="_blank">查看更多搜索结果</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  var opt = { position: 'left center' };
+  var $helpSideToolbar = $(".button.toolbar-help");
+  
+  $(function() {
+    if (false) {
+      $helpSideToolbar.popup(opt);
+    } else {
+      $helpSideToolbar.popup('show', opt);
+      setTimeout(function() {
+        $helpSideToolbar.popup('hide', opt);
+      }, 3000);
+    }
+  })
+</script>
+
+<div class='button share-link'>
+<i class='iconfont icon-share'></i>
+</div>
+<div class='ui popup dark'>
+<div class='header'>
+分享到
+</div>
+<div class='bdsharebuttonbox' style='display: flex'>
+<a class='iconfont icon-home-service-wechat' data-cmd='weixin' title='分享到微信'></a>
+<a class='iconfont icon-weibo' data-cmd='tsina' title='分享到新浪微博'></a>
+<a class='iconfont icon-qq' data-cmd='sqq' title='分享到QQ好友'></a>
+<a class='iconfont icon-qzone' data-cmd='qzone' title='分享到QQ空间'></a>
+</div>
+</div>
+<div class='button gotop popup' id='gotop'>
+<i class='iconfont icon-top'></i>
+</div>
+<div class='ui popup dark'>回到顶部</div>
+</div>
+<style>
+  .side-toolbar .bdsharebuttonbox a {
+    font-size: 24px;
+    color: white !important;
+    opacity: 0.9;
+    margin: 6px 6px 0px 6px;
+    background-image: none;
+    text-indent: 0;
+    height: auto;
+    width: auto;
+  }
+</style>
+<script>
+  (function() {
+    $('#project-user-message').popup({
+      position: 'left center'
+    });
+  
+  }).call(this);
+</script>
+<script>
+  Gitee.initSideToolbar({})
+</script>
+<script>
+  window._bd_share_config = {
+    "common": {
+      "bdSnsKey": {},
+      "bdText": document.title,
+      "bdMini": "1",
+      "bdMiniList": ["bdxc","tqf","douban","bdhome","sqq","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],
+      "bdPic": "",
+      "bdStyle": "1",
+      "bdSize": "32"
+    },
+    "share": {}
+  }
+</script>
+<script src="/bd_share/static/api/js/share.js" type="text/javascript"></script>
+
+
+</body>
+</html>
